@@ -21,7 +21,8 @@ import os
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-app.config["IMAGE_UPLOADS"] = "/home/rediet/alx/ReConnect/api/v1/static/images"
+cwd = os.getcwd()
+app.config["IMAGE_UPLOADS"] = cwd + "/api/v1/static/images"
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
 # app.config['DEBUG']=True
 # app.config['WHOOSH_BASE'] = 'whoosh'
