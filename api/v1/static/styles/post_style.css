@@ -1,0 +1,118 @@
+@media(min-width: 768px) {
+    .news-input {
+        width: 50%;
+    }
+}
+
+#ReConnect {
+    font-size: 25px;
+    color: darkorange;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    color: grey;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.pics {
+	width:30%;
+}
+
+.submit {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.submit button {
+    font-size: 20px;
+    background-color: darkorange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 10%;
+    height: 30%;
+}
+
+table {
+    width: 60%;
+}
+
+/* tr {
+    width: 100%;
+} */
+
+td {
+    width: 40%;
+}
+
+.textinput {
+    margin: 10px;
+    /* margin-top: 10px; */
+    padding: 10px;
+    background: #ECE8E8;
+    border: 0px;
+    width: 100%;
+    height: 50px;
+    /* border-radius: 5px; */
+}
+
+/* #radio {
+    width: 50px;
+} */
+
+.report {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: darkorange;
+    margin-top: 2%;
+}
+
+#male {
+    margin: 10px;
+    font-size: 20px;
+    color: gray;
+}
+
+#female {
+    margin: 10px;
+    font-size: 20px;
+    color: gray;
+}
+
+.blah {
+	opacity: 0.7;
+	margin-left: 20px;
+	border: dotted 1px gray;
+	margin-bottom: 20px;
+	width:150px;
+	border-radius: 10px;
+	padding: 55px;
+}
+
+.blahImage {
+	margin-left: 20px;
+	border: dotted 1px gray;
+	margin-bottom: 20px;
+	width:150px;
+	border-radius: 10px;
+}
+
+.fileInput {
+	display: None;
+}
+
+#heading {
+	font-size: 25px;
+}

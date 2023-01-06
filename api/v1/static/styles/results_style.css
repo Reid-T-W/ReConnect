@@ -1,0 +1,22 @@
+img {
+	width: 80%;
+	height: auto;
+	margin-left: 30px;
+	margin-right: 5px;
+}
+
+label {
+	padding-left: 10px;
+	margin-top: 20px;
+	color: darkorange;
+}
+
+.otherimages {
+	margin-top: 20px;
+	width: 15%;
+	height: auto;
+}
+
+#flexbox {
+	width: 40%;
+}

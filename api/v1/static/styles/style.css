@@ -1,0 +1,78 @@
+@media(min-width: 768px) {
+    .news-input {
+        width: 50%;
+    }
+}
+
+#ReConnect {
+    font-size: 25px;
+    color: darkorange;
+}
+
+.introplusimage {
+    display: flex;
+    margin-left: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro {
+    color: gray;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+#reconnect2 {
+    color: darkorange;
+}
+
+.intro p {
+    margin-top: 5%;
+    font-size: 25px;
+    color: gray;
+}
+
+#img {
+    width: 40%;
+}
+
+#search {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    background-color: white;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 20%;
+    height: 20%;
+    margin-top: 4%;
+    /* font-weight: bold; */
+}
+
+#post {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    background-color: darkorange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    height: 20%;
+    margin-top: 4%;
+    /* font-weight: bold; */
+}
+
+.testimonials {
+    background-color: white;
+    text-align: center;
+    margin-left: 10%;
+    color: grey;
+    margin-top: 5%;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    color: grey;
+    text-align: center;
+}
