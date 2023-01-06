@@ -6,10 +6,12 @@
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../static/scripts/for_post.js"></script>
+    <script type="text/javascript" src="../static/scripts/for_result.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="../static/styles/post_style.css" rel="stylesheet">
+    <link href="../static/styles/results_style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+    
   </head>
   <body>
     <!--  Navbar  -->
@@ -47,57 +49,49 @@
     </nav>
     <div>
         <div class="report">
-            <h2 id="heading">Report Missing Person</h2>
+            <h2>Missing Person Details</h2>
         </div>
-
 	<form id="missingperson" enctype="multipart/form-data">
-		<div class="pics">
-		<div id="first">
-			<div id="firstPlaceholders">
-				<label for="image1"><img id="actualImage1" class="blah display" src="../static/images/placeholders/add-icon.svg" alt="placeholder"/></label>
-				<label for="image2"><img id="actualImage2" class="blah display" src="../static/images/placeholders/add-icon.svg" alt="placeholder"/></label>
-			</div>
-			<div id="firstFiles">
-	    			<input class="fileInput" type="file" onchange="readURLImage1(this);" name="image1" id="image1">
-        			<input class="fileInput" type="file" onchange="readURLImage2(this);" name="image2" id="image2">
-			</div>
-		</div>
-		<div id="second">
-			<div id="secondPlaceholders">
-				<label for="image3"><img id="actualImage3" class="blah display" src="../static/images/placeholders/add-icon.svg" alt="placeholder"/></label>
-				<label for="image4"><img id="actualImage4" class="blah display" src="../static/images/placeholders/add-icon.svg" alt="placeholder"/></label>
-			</div>
-			<div id="secondFiles">
-				<input class="fileInput" type="file" onchange="readURLImage3(this);" name="image3" id="image3">
-        			<input class="fileInput" type="file" onchange="readURLImage4(this);" name="image4" id="image4">
-			</div>
+		<div id="flexbox">
+		<img id="img" src="{{pic_url}}" alt="">
+		<div id="otherimages_div">
+			{% for pic in person.pics %}
+				<img data-id={{pic.id}} class="otherimages" id="img" src="{{ url_for('static', filename=pic.picture) }}" alt="">
+			{% endfor %}
 		</div>
 		</div>
 	  <table>
-	    <tr><td><input type="text" placeholder="Name" name="name" class="textinput"></td></tr>
-	    <tr><td>
-	      <input type="radio" id="male" name="gender" value="male">
+		  <tr><td><label>Name</label><input type="text" placeholder="Name" name="name" class="textinput" value="{{ person.missingperson_name }}" readonly></td></tr>
+	    <tr><td> 
+		  <label>Gender</label>
+		  {% if person.missingperson_gender == 'male' %}
+		  <input type="radio" id="male" name="gender" value="male" checked="checked" readonly>
 		  <label id="male" for="male">Male</label>
-		  <input type="radio" id="female" name="gender" value="female">
+		  <input type="radio" id="female" name="gender" value="female" readonly>
 		  <label id="female" for="female">Female</label>
+		  {% elif person.missingperson_gender == 'female' %}
+                  <input type="radio" id="male" name="gender" value="male" readonly>
+		  <label id="male" for="male">Male</label>
+		  <input type="radio" id="female" name="gender" value="female" checked="checked" readonly>
+		  <label id="female" for="female">Female</label>
+		  {% endif %}
+
 	    </td></tr>
-	    <tr><td><input type="text" placeholder="Description" name="description" class="textinput"></td></tr>
-        <tr><td><input type="text" placeholder="City" name="city" class="textinput"></td></tr>
-        <tr><td><input type="text" placeholder="SubCity" name="subcity" class="textinput"></td></tr>
-	    <tr><td><input type="text" placeholder="Woreda" name="woreda" class="textinput"></td></tr>
+	    <tr><td><label>Description</label><input type="text" placeholder="Description" name="description" class="textinput" value="{{ person.missingperson_description }}" readonly></td></tr>
+	    <tr><td><label>City</label><input type="text" placeholder="City" name="city" class="textinput" value="{{ address.city }}" readonly></td></tr>
+	    <tr><td><label>SubCity</label><input type="text" placeholder="SubCity" name="subcity" class="textinput" value="{{ address.subcity }}" readonly></td></tr>
+	    <tr><td><label>Woreda</label><input type="text" placeholder="Woreda" name="woreda" class="textinput" value="{{ address.woreda }}" readonly></td></tr>
+	    <tr><td><label>Contacts</label></td></tr>
+	    {% for contact in person.contacts %}
 	    <tr>
-	      <td><input type="text" placeholder="Contact 1 Name" name="contact1name" class="textinput"></td>
-	      <td><input type="text" placeholder="Contact 1 Phone" name="contact1phone" class="textinput"></td>
+	     <td><label>Name</label><input type="text" placeholder="Contact 1 Name" name="contact1name" class="textinput" value="{{ contact.contacts_name }}" readonly></td>
+	      {% for phone in contact.phones %}
+	     <td><label>Phone</label><input type="text" placeholder="Contact 1 Phone" name="contact1phone" class="textinput" value="{{ phone.contactsphone_name}}" readonly></td>
+	     {% endfor %}
 	    </tr>
-	    <tr>
-	      <td><input type="text" placeholder="Contact 2 Name" name="contact2name" class="textinput"></td>
-	      <td><input type="text" placeholder="Contact 2 Phone" name="contact2phone" class="textinput"></td>
-	    </tr>
+	    {% endfor %}
 	  </table>
 	</form>
-    <div class="submit">
-        <button type="submit" name="submit">Submit</button>
-    </div>
 	
 	
     </div>

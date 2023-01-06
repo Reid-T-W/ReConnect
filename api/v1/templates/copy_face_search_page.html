@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="../static/styles/search_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/for_search.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!--  Navbar  -->
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3">
+        <div id="header" class="container">
+            <a href="#" id="ReConnect" class="navbar-brand h1">ReConnect</a>
+            
+            <button 
+                class="navbar-toggler" 
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navmenu">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="http://localhost:5000/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item navtext">
+                        <a href="http://localhost:5000/post" class="nav-link">Post</a>
+                    </li>
+                    <li class="nav-item navtext">
+                        <a href="http://localhost:5000/search" class="nav-link">Search</a>
+                    </li>
+                    <li class="nav-item navtext">
+                        <a href="http://localhost:5000/about" class="nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Newsletter -->
+    <section>
+        <div class="testimonials">
+            <div id="searchtitle">Search</div>
+            <div id="resulttitle">Search Results</div>
+        </div>
+    </section>
+
+    <!-- Boxes -->
+    <div id="all">
+        <div id="search">
+	  <form id="searchperson" enctype="multipart/form-data">
+		  <input class="image" type="file" onchange="readURL(this);" name="image1" id="image1">
+	  </form>
+		<input type="text" placeholder="Name" name="name" class="textinput">
+            <button id="searchbtn">
+                Search
+            </button>
+        </div>
+        <div id="searchresults sorted by face similarity">
+	  {% set counter = namespace(value=1) %}
+            <section class="p-5">
+                <div class="container">
+		  <row class="row text-center">
+		    {%for person in sorted_missingpersons -%}
+		    {% if counter.value > 3 -%}
+		      <section class="p-5">
+		      <div class="container">
+		      <row class="row text-center">
+		      <div class="col-md">
+			      <div data-id="{{ person.id }}" class="card bg-light text-secondary border-0">
+                                  <div class="card-body text-center">
+                                      <div class="h1 mb-3">
+                                          <img class="img-fluid" alt="Responsive image" id="img" src="../static/images/placeholders/womanprofile.svg" alt="">
+                                      </div>
+				      <h3 class="card-title mb-3">{{ person.missingperson_name }}</h3>
+                                  </div>
+                              </div>
+		      </div>
+
+		    {% else -%}
+		      <div class="col-md">
+			      <div data-id="{{ person.id }}" class="card bg-light text-secondary border-0">
+                                  <div class="card-body text-center">
+                                      <div class="h1 mb-3">
+                                          <img class="img-fluid" alt="Responsive image" id="img" src="../static/images/placeholders/womanprofile.svg" alt="">
+                                      </div>
+				      <h3 class="card-title mb-3">{{ person.missingperson_name }}</h3>
+                                  </div>
+                              </div>
+		      </div>
+		      {%set counter.value = counter.value + 1 %}
+		    {% endif %}
+		    {% if counter.value > 3 -%}
+		      </row>
+		      </div>
+		      </section>
+		      <section class="p-5">
+                      <div class="container">
+		      <row class="row text-center">
+		      {% set counter.value = 1 %}
+		    {% endif %}
+		    {% endfor %}
+		  </row>
+                </div>
+            </section>
+         </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+<footer>
+    <div class="footer">
+        &copy 2022 ReConnect
+    </div>
+</footer>
+</html>

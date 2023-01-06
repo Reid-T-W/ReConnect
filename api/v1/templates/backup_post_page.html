@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ReConnect</title>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/for_post.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+      <div class = "menu">
+        <a href="http://localhost:5000/">Home</a>
+	<a href="http://localhost:5000/post">Post</a>
+	<a href="http://localhost:5000/search">Search</a>
+	<a href="http://localhost:5000/about">About</a>
+      </div>
+    </header>
+    <div>
+    	<h1>Report Missing Person</h1>
+	<form id="missingperson" enctype="multipart/form-data">
+	    <input type="file" onchange="readURL(this);" name="image1" id="image1">
+	      <img class="blah" src="https://picsum.photos/200/300" alt="placeholder"/>
+	  <table>
+	    <tr><td><input type="text" placeholder="Name" name="name"></td></tr>
+	    <tr><td>
+	          <input type="radio" id="male" name="gender" value="male">
+		  <label for="male">Male</label>
+		  <input type="radio" id="female" name="gender" value="female">
+		  <label for="female">Female</label>
+	    </td></tr>
+	    <tr><td><input type="text" placeholder="Description" name="description"></td></tr>
+	    <tr><td><input type="text" placeholder="SubCity" name="subcity"></td></tr>
+	    <tr><td><input type="text" placeholder="Woreda" name="woreda"></td></tr>
+	    <tr>
+	      <td><input type="text" placeholder="Contact 1 Name" name="contact1name"></td>
+	      <td><input type="text" placeholder="Contact 1 Phone" name="contact1phone"></td>
+	    </tr>
+	    <tr>
+	      <td><input type="text" placeholder="Contact 2 Name" name="contact2name"></td>
+	      <td><input type="text" placeholder="Contact 2 Phone" name="contact2phone"></td>
+	    </tr>
+	  </table>
+	</form>
+	<button type="submit" name="submit">Submit</button>
+	
+    </div>
+    <footer>
+      <p>&copy; 2022 ReConnect</p>
+    <footer>
+  </body>
