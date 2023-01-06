@@ -7,7 +7,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Columm, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 
@@ -16,13 +16,13 @@ if models.storage_t == "db":
                                  Column('missingperson_id', String(60),
                                         ForeignKey('missingperson.id',
                                                    onupdate='CASCADE',
-                                                   ondelete='CASCADE')
+                                                   ondelete='CASCADE'),
                                         primary_key=True),
                                  Column('contacts_id', String(60),
                                         ForeignKey('contacts.id',
                                                    onupdate='CASCADE',
                                                    ondelete='CASCADE'),
-                                        primary_key=True)
+                                        primary_key=True))
 
 
 

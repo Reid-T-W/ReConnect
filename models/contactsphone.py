@@ -4,7 +4,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Columm, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
@@ -15,4 +15,4 @@ class ContactsPhone(BaseModel, Base):
         contactsphone_name = Column(String(30), nullable=False)
         contacts_id = Column(String(60),
                              ForeignKey('contacts.id'),
-                             nullable=False),
+                             nullable=False)

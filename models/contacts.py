@@ -4,8 +4,9 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Columm, String, ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+import json
 
 
 class Contacts(BaseModel, Base):
@@ -16,3 +17,6 @@ class Contacts(BaseModel, Base):
         phones = relationship("ContactsPhone",
                               backref="contacts",
                               cascade="all, delete, delete-orphan")
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
