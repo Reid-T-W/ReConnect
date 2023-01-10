@@ -143,3 +143,11 @@
 #loading-image {
 	z-index: 100;
 }
+
+#searchbtn:hover {
+	opacity: 0.6;
+}
+
+.blah:hover {
+	opacity: 0.4;
+}
