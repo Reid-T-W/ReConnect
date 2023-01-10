@@ -61,6 +61,7 @@ function readURLImage4(input) {
 
 //Sending user input to server
 $(document).ready(function () {
+  $('#loading').hide();
   $("button[name='submit']").click(function(){
     //stop submit the form, we will post it manually
     event.preventDefault();
@@ -70,7 +71,7 @@ $(document).ready(function () {
    
     // Create a FormData Object
     var data = new FormData(form);
-    
+    $('#loading').show(); 
     //Disabling the submit button
     $("button[name='submit']").prop("disabled", true);
     $.ajax({
@@ -82,8 +83,12 @@ $(document).ready(function () {
       contentType: false,
       success: function (data) {
         console.log("SUCCESS : ", data);
+	$('#loading').hide();
         $("button[name='submit']").prop("disabled", false);
       },
     });
   });
+  // $(window).on('load', function () {
+  //  $('#loading').hide();
+  // }); 
 });

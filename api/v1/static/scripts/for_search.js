@@ -35,6 +35,8 @@ function readURL(input) {
 $(document).ready(function () {
 	let id;
 
+	$('#loading').hide();
+
 	$('.card').click(function () {
 		var newWindow = window.open("","_blank");
 		id = $(this).attr('data-id');
@@ -61,6 +63,7 @@ $(document).ready(function () {
 		var form = $('#searchperson')[0];
 		// Create a FormData Object
 		var data = new FormData(form);
+		$('#loading').show();
 
 		$.ajax({
 			type: "POST",
@@ -70,7 +73,8 @@ $(document).ready(function () {
 			processData: false,
 			contentType: false,
 	        	success: function (data) {
-				console.log(data);
+				$('#loading').hide();
+				console.log("Success");
 				$("#searchbtn").prop("disabled", false);
 				$("body").html(data);
 			},
