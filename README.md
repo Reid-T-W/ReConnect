@@ -17,4 +17,4 @@ The webapp will be deployed soon, users will then be able to directly access the
 ### Search Person
 1. Upload the picture of the person you want to search and click on search.
 2. The search results are sorted based on similarity to the person being serached.
-3. Click on the closes match (first result) in order to see the details of the person and retrieve contact info.
+3. Click on the closest match (first result) in order to see the details of the person and retrieve contact info.
