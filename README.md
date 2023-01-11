@@ -1,9 +1,13 @@
 # ReConnect
 ## Table of Contents
-[Introduction](https://github.com/Reid-T-W/ReConnect#introduction)
-[Installation](https://github.com/Reid-T-W/ReConnect#installation)
-[Usage](https://github.com/Reid-T-W/ReConnect#usage)
+[Introduction](https://github.com/Reid-T-W/ReConnect#introduction)  
+[Installation](https://github.com/Reid-T-W/ReConnect#installation)  
+[Usage](https://github.com/Reid-T-W/ReConnect#usage)  
+[Contributing](https://github.com/Reid-T-W/ReConnect#contributing)  
+[Related Projects](https://github.com/Reid-T-W/ReConnect#related-projects)  
+[Licensing](https://github.com/Reid-T-W/ReConnect#licensing)  
 
+[Licensing]
 ## Introduction
 ![alt text](https://github.com/Reid-T-W/ReConnect/blob/master/ReConnect_home_page_for_README.png?raw=true)
 ReConnect is a web app that helps in connect missing people with their loved ones. An individual can report a person as missing to the ReConnect System, and other people can search if an individual has been reported as missing, the search and retrieval will be done via face recognition. 
