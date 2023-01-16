@@ -28,6 +28,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
+        # Instantiating from dictionary if kwargs is present
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
@@ -42,6 +43,7 @@ class BaseModel:
                 self.updated_at = datetime.utcnow()
             if kwargs.get("id", None) is None:
                 self.id = str(uuid.uuid4())
+        # This else executes if kwargs (dictionary) is not present
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.utcnow()
