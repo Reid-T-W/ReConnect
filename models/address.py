@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 
 
 class Address(BaseModel, Base):
-    """Representation of ContactsPhone"""
+    """Representation of Address"""
     if models.storage_t == "db":
         __tablename__ = 'address'
         city = Column(String(30), nullable=False)
