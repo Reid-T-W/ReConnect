@@ -32,6 +32,7 @@ This is what ReConnect aims to solve, its a central platform, where missing peop
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
 - [x] Post Missing Person
 - [x] Search Missing Person
+- [x] Retrieve Details of Missing Person
 ## To Do  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
 - [ ] Add User Account
