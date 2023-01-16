@@ -14,50 +14,27 @@ from models.picture import Picture
 from models.address import Address
 from math import ceil
 import os
-# from flask_sqlalchemy import SQLAlchemy
-# import flask_whooshalchemy3 as wa
-# from flask_msearch import Search
-# import os
 
+
+# Creating the flask app
 app = Flask(__name__)
+# Helps json data print properly
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+# Getting the current directory so that images storage
+# path "app.config["IMAGE_UPLOADS"]" can be dynamically setup
+# this helps in making the code portable
 cwd = os.getcwd()
 app.config["IMAGE_UPLOADS"] = cwd + "/api/v1/static/images"
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
-# app.config['DEBUG']=True
-# app.config['WHOOSH_BASE'] = 'whoosh'
-# db = SQLAlchemy()
-# search = Search(db=db)
-# search.init_app(app)
-# search.create_index(update=True)
-# MSEARCH_INDEX_NAME =  os.path.join(app.root_path,'msearch')
-# MSEARCH_PRIMARY_KEY = 'id'
-# MSEARCH_ENABLE = True
-
-
-# wa.whoosh_index(app, MissingPerson, ContactsPhone, Contacts)
-
 app.register_blueprint(app_views)
+# Setting up CORS (Cross Origin Requests) rules 
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 def get_missingpersons():
     """
-    Retrieves the list of all State objects
+    Retrieves the list of all MissingPersons objects
     """
     all_missingpersons = storage.all(MissingPerson).values()
     return all_missingpersons
-    # list_missingpersons = []
-    # for person in all_missingpersons:
-    #   list_missingpersons.append(person.to_dict())
-    # return jsonify(list_missingpersons)
-
-def get_address(address_id):
-    """ Retrieves a specific Address """
-    address = storage.get(Address, address_id)
-    return address
-    # if not address:
-    #   abort(404)
-    # return jsonify(address.to_dict())
 
 def get_address(address_id):
     """ Retrieves a specific Address """
@@ -74,26 +51,30 @@ def get_missingperson(missingperson_id):
     return person
 
 def sort_by_face_similarity(search_image, missingpersons):
+    """Sorts all missingpersons based on their similarity to the search_image"""
     distances = []
+    # Generating embedding for the test image
+    # so that it could be compared with the embeddings
+    # of individual stored in the database.
     test_embedding = Picture.generate_embedding(search_image)
     for person in missingpersons:
         indiv_dists = []
         for pic in person.pics:
+            # Computing the distance between the test_embedding
+            # and the embedding strored in pic.
             distance = pic.compute_distance(test_embedding)
             indiv_dists.append(distance)
         # Out of all the images for an individual the minimum
         # distance is taken for identification purpose
         distances.append(min(indiv_dists))
-    # sorted_missingpersons = [missingpersons for distances, missingpersons in sorted(zip(distances, missingpersons))]
     # Sorting the missingpersons list based on their distance to the test embedding
     zipped = zip(missingpersons, distances)
     # Converting to list
     zipped = list(zipped)
     # Sorting the list using sorted and lambda
     sorted_missingpersons = sorted(zipped, key = lambda x: x[1])
-    #Extracting the missingperson object list from the zipped list
+    #Extracting the sorted missingperson object list from the zipped list
     new_list = list(zip(*sorted_missingpersons))
-    print("Object Only: ", new_list[0])
     return new_list[0]
 
 @app.route('/', methods=['GET'], strict_slashes=False)
@@ -101,74 +82,64 @@ def get_home_page():
     """ Get Home Page """
     return render_template("home_page.html")
 
-
 @app.route('/post', methods=['GET'], strict_slashes=False)
 def get_post_page():
+    """ Get Post page """
     return render_template("post_page.html")
 
-@app.route('/post', methods=['POST'], strict_slashes=False)
-def save_data():
-    if request.method == "POST":
-            request_dict = {}
-            name = request.form['name']
-            gender = request.form['gender']
-            request_dict["name"] = name
-            request_dict["gender"] = gender
-            # name = request.files["name"]
-            return request_dict
 
 @app.route('/search', methods=['GET'], strict_slashes=False)
 def get_search_page():
+    """ Get search page """
     # Get all individuals in the database
     missingpersons = get_missingpersons()
-    #names = {}
-    #for person in missingpersons:
-    #    names[person.id] = person.missingperson_name
-    #count_missingpersons = storage.count(MissingPerson)
-    #if count_missingpersons <= 3:
-    #    rows = 1
-    #else:
-    #    rows = ceil(count_missingpersons/3)
-    # Pass the name and image of every individual
+    # Pass all individuals to the search_page so that it could
+    # be rendered
     return render_template("search_page.html", missingpersons=missingpersons)
-    #return render_template("search_page.html")
 
-#@app.route('/static/images/<filename>')
-#def get_file(filename):
-#    return send_from_directory('/static/images', filename)
 
 @app.route('/search/<missingperson_id>', methods=['GET'], strict_slashes=False)
 def get_result_page(missingperson_id):
+    """ Get results page which displays an individuals details """
+    # Getting person object that has the missingperson_id
     person = get_missingperson(missingperson_id)
+    # Getting the address of person
     address = get_address(person.address_id)
+    # Getting all pics of person
     pics = person.pics
+    # Getting a url for a single pic that will be displayed as the main picture
+    # when the results page is rendered, a for loop is actually not necessary here
+    # we could have chose the first pic via indexing, the reason why I said first 
+    # pic is because it is a must for a user to enter a single pic; other pics are
+    # optional, therefore we might run into errors if we index anything other than 
+    # the first index.
     for pic in pics:
         pic_url = url_for('static', filename=pic.picture)    
     return render_template("results_page.html", person=person, address=address, pic_url=pic_url)
 
 
-# @app.route('/fulltext/<query>', methods=['GET'], strict_slashes=False)
-# def full_text_search(query):
-#    person = MissingPerson.query.msearch(keyword,fields=['missingperson_name','missingperson_gender','missingperson_description'])
-#    print(person)
-#    return
-
 @app.route('/facesearch', methods=['POST'], strict_slashes=False)
 def get_similar_individual():
-    # Get all individuals in the database sorted by face similarity
+    """ Get all individuals in the database sorted by face similarity """
     # Retriving the image to be searched
     search_image = request.files["image1"]
+    # Saving the search image in a temporary directory
+    # This is done so that we can easily pass the image
+    # to the sort_by_face_similarity function.
     temp_filename = 'temporary/' + search_image.filename
     pic_path = os.path.join(current_app.config["IMAGE_UPLOADS"], temp_filename)
     search_image.save(pic_path)
     # Getting all missing persons saved in the database
     missingpersons = get_missingpersons()
-    # face_sorted_missingpersons = sort_by_face_similarity(search_image, missingpersons)
+    # Getting list of missingpersons sorted by face similarity to the
+    # search image
     sorted_missingpersons = sort_by_face_similarity(pic_path, missingpersons)
     return render_template("search_page.html", missingpersons=sorted_missingpersons)
 
+
 @app.route('/about', methods=['GET'], strict_slashes=False)
 def get_about_page():
+    """ Get about page """
     return render_template("about_page.html")
 
 
