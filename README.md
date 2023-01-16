@@ -10,6 +10,7 @@
 [Usage](https://github.com/Reid-T-W/ReConnect#usage)  
 [Contributing](https://github.com/Reid-T-W/ReConnect#contributing)  
 [Related Projects](https://github.com/Reid-T-W/ReConnect#related-projects)  
+[Authors](https://github.com/Reid-T-W/ReConnect#authors)  
 [Licensing](https://github.com/Reid-T-W/ReConnect#licensing)  
 
 ## Introduction
@@ -70,7 +71,9 @@ This project is open for contributions, feel free to send pull requests, it will
 ## Related Projects
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 Currently their are no related projects
-
+## Authors  
+[Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
+Rediet Tadesse [Linkedin](https://www.linkedin.com/in/rediet-tadesse-43209013b/) | [Github](https://github.com/Reid-T-W)  
 ## Licensing
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 Licensed under the Apache License 2.0
