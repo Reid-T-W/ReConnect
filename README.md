@@ -39,7 +39,7 @@ This is what ReConnect aims to solve, its a central platform, where missing peop
 - [ ] Improve posting speed
 - [ ] Improve searching speed
 ## Face Search Implementation  
-[Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
+[Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 In order to implement the face search, a library called [keras-facenet](https://github.com/faustomorales/keras-facenet) is used. It provides pre-trained versions of the facenet model.  
 The facenet model is then used to generate embeddings for every face, which is later used to determing the similarity between two faces.
 ## Installation
