@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" objects that handle all default RestFul API actions for States """
+""" objects that handle all default RestFul API actions for MissingPerson """
 from models.missingperson import MissingPerson
 from models.contactsphone import ContactsPhone
 from models.contacts import Contacts
@@ -17,7 +17,7 @@ import json
 @swag_from('documentation/missingperson/get_missingperson.yml', methods=['GET'])
 def get_missingpersons():
     """
-    Retrieves the list of all State objects
+    Retrieves the list of all MissingPerson objects
     """
     all_missingpersons = storage.all(MissingPerson).values()
     list_missingpersons = []
@@ -44,15 +44,11 @@ def delete_missingperson(missingperson_id):
     """
     Deletes a MissingPerson Object
     """
-
     person = storage.get(MissingPerson, missingperson_id)
-
     if not person:
         abort(404)
-
     storage.delete(person)
     storage.save()
-
     return make_response(jsonify({}), 200)
 
 
@@ -62,7 +58,10 @@ def post_missingperson():
     """
     Creates a MissingPerson
     """
+    # Retrieving files from request
     if request.files:
+      # Dictionaries that will be used to instantiate objects for
+      # all the different classes
       missingperson_dict = {}
       address_dict = {}
       picture_dict = {}
@@ -70,7 +69,9 @@ def post_missingperson():
       contacts2_dict = {}
       contacts1phones_dict = {}
       contacts2phones_dict = {}
-
+      
+      # Populating the dictionaries with data that is recieved from 
+      # the front end (from request.form)
       for key in request.form.keys():
         if key == "name":
           missingperson_dict["missingperson_name"] = request.form[key]
@@ -100,45 +101,52 @@ def post_missingperson():
     contacts2_instance = Contacts(**contacts2_dict)
     contacts2_instance.save()
 
-    # Creating contactsphone instance
+    # Adding the contact id as a foreign key to contactsphone
     # Adding contact id to the contactsphone dictionary
     contacts1phones_dict["contacts_id"] = contacts1_instance.id
     contacts2phones_dict["contacts_id"] = contacts2_instance.id
-
+ 
+    # Creating contactsphone instance
     contacts1phone_instance = ContactsPhone(**contacts1phones_dict)
     contacts1phone_instance.save()
     contacts2phone_instance = ContactsPhone(**contacts2phones_dict)
     contacts2phone_instance.save()
+
     # Creating address instance
     address_instance = Address(**address_dict)
     address_instance.save()
 
+    # Adding address id as a foreign key to the missingperson dictionary
+    missingperson_dict["address_id"] = address_instance.id 
     # Creating missing person instance
-    # Adding address id to missingperson dictionary
-    missingperson_dict["address_id"] = address_instance.id
     missingperson_instance = MissingPerson(**missingperson_dict)
+    # Adding contacts to the missingperson instance
     missingperson_instance.contacts.append(contacts1_instance)
     missingperson_instance.contacts.append(contacts2_instance)
     missingperson_instance.save()
     
     images = []
-    # Saving the image of the missing person
+    # Saving the image of the missing person to a local directory
+    # Checking the image1 exists (is passed from the frontend)
     if request.files["image1"].filename is not "":
         image1 = request.files["image1"]
         pic1_path = os.path.join(current_app.config["IMAGE_UPLOADS"], image1.filename)
         image1.save(pic1_path)
         images.append(image1)
+    # Checking the image2 exists (is passed from the frontend)
     if request.files["image2"].filename is not "":
         image2 = request.files["image2"]
         pic2_path = os.path.join(current_app.config["IMAGE_UPLOADS"], image2.filename)
         image2.save(pic2_path)
         images.append(image2)
+    # Checking the image3 exists (is passed from the frontend)
     if request.files["image3"].filename is not "":
         print("Filename: ", request.files["image3"].filename)
         image3 = request.files["image3"]
         pic3_path = os.path.join(current_app.config["IMAGE_UPLOADS"], image3.filename)
         image3.save(pic3_path)
         images.append(image3)
+    # Checking the image4 exists (is passed from the frontend)
     if request.files["image4"].filename is not "":
         image4 = request.files["image4"]
         pic4_path = os.path.join(current_app.config["IMAGE_UPLOADS"], image4.filename)
@@ -147,16 +155,18 @@ def post_missingperson():
     
     for image in images:
         # Creating picture instance
+        # Adding the missingperon_id as a foreign key to the picture dictionary
         picture_dict["missingperson_id"] = missingperson_instance.id
-        # picture_dict["picture"] = pic_path
+        # Adding picture URL to picture dictionary
         picture_dict["picture"] = os.path.join('images/', image.filename)
+        # Creating picture instance
         picture_instance = Picture(**picture_dict)
-         # pic_url = url_for('static', filename=picture_instance.picture)
+        # Getting the pic path so that it could be used to generate an embedding
         pic_path = os.path.join(current_app.config["IMAGE_UPLOADS"], image.filename)
+        # Generating and saving embedding to picture instace
         embedding = picture_instance.generate_embedding(pic_path)
         picture_instance.add_embedding(embedding)
         picture_instance.save()
-    #return make_response(jsonify(missingperson_instance.to_dict()), 201)
     return "Saved Successfully"
 
 

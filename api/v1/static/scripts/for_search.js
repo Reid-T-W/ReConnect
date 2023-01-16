@@ -1,19 +1,4 @@
-//Function for displaying selected image
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-			$('.blah')
-				.attr('src', e.target.result)
-				.width(150)
-				.height(200);
-		};
-	reader.readAsDataURL(input.files[0]);
-}
-}
-
-// Displaying the first Image
+// Function for displaying selected image
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -29,23 +14,21 @@ function readURL(input) {
 }
 
 
-
-
-
 $(document).ready(function () {
 	let id;
-
+	// Hiding the loading GIF
 	$('#loading').hide();
 
 	$('.card').click(function () {
+		// Opening person details on a new tab
 		var newWindow = window.open("","_blank");
+		// Getting the id of the selected person
 		id = $(this).attr('data-id');
-		//window.location.href = 'http://localhost:5000/search/'+id;
+		// Sending an ajax GET request
 		$.ajax({
 			type: "GET",
 			url: "http://localhost:5000/search/"+id,
 			success: function (data) {
-				// window.location.href = 'http://localhost:5000/search/'+id;
 				newWindow.location.href = 'http://localhost:5000/search/'+id;
 				console.log("SUCCESS : ", data);
 			},
@@ -54,17 +37,18 @@ $(document).ready(function () {
 
 
 
-
+	// Fucntion that executes when the searchbtn is clicked
 	$("#searchbtn").click(function(){
-		//stop submit the form, we will post it manually
+		//stop submitting the form, we will post it manually
 		event.preventDefault();
 		
 		// Get form
 		var form = $('#searchperson')[0];
 		// Create a FormData Object
 		var data = new FormData(form);
+		// Showing the GIF when the searh_btn is clicked
 		$('#loading').show();
-
+		// Sending an ajax post request
 		$.ajax({
 			type: "POST",
 			enctype: 'multipart/form-data',

@@ -7,6 +7,9 @@ function readURLImage1(input) {
     reader.onload = function (e) {
       $('#actualImage1')
         .attr('src', e.target.result)
+	// When an image is selected the blah class is removed 
+	// and the blahImage class is added, this helps in avoiding
+	// the unwanted padding that is present in the blah class
 	$('#actualImage1').addClass("blahImage");
 	$('#actualImage1').removeClass("blah");
     };
@@ -22,6 +25,9 @@ function readURLImage2(input) {
     reader.onload = function (e) {
       $('#actualImage2')
         .attr('src', e.target.result)
+	// When an image is selected the blah class is removed 
+	// and the blahImage class is added, this helps in avoiding
+	// the unwanted padding that is present in the blah class
 	$('#actualImage2').addClass("blahImage");
 	$('#actualImage2').removeClass("blah");
     };
@@ -37,6 +43,9 @@ function readURLImage3(input) {
     reader.onload = function (e) {
       $('#actualImage3')
         .attr('src', e.target.result)
+	// When an image is selected the blah class is removed 
+	// and the blahImage class is added, this helps in avoiding
+	// the unwanted padding that is present in the blah class
 	$('#actualImage3').addClass("blahImage");
 	$('#actualImage3').removeClass("blah");
     };
@@ -52,6 +61,9 @@ function readURLImage4(input) {
     reader.onload = function (e) {
       $('#actualImage4')
         .attr('src', e.target.result)
+	// When an image is selected the blah class is removed 
+	// and the blahImage class is added, this helps in avoiding
+	// the unwanted padding that is present in the blah class
 	$('#actualImage4').addClass("blahImage");
 	$('#actualImage4').removeClass("blah");
     };
@@ -61,7 +73,11 @@ function readURLImage4(input) {
 
 //Sending user input to server
 $(document).ready(function () {
+  // Hiding the loading GIF
   $('#loading').hide();
+  
+  //Execute the following function when the submit button
+  //is clicked
   $("button[name='submit']").click(function(){
     //stop submit the form, we will post it manually
     event.preventDefault();
@@ -71,6 +87,7 @@ $(document).ready(function () {
    
     // Create a FormData Object
     var data = new FormData(form);
+    // Show the loading GIF, as the submit button is already clicked
     $('#loading').show(); 
     //Disabling the submit button
     $("button[name='submit']").prop("disabled", true);
@@ -83,12 +100,12 @@ $(document).ready(function () {
       contentType: false,
       success: function (data) {
         console.log("SUCCESS : ", data);
+        // Hide the loading GIF as the AJAX request has
+	// successfully executed
 	$('#loading').hide();
+	// Enabling the submit button
         $("button[name='submit']").prop("disabled", false);
       },
     });
   });
-  // $(window).on('load', function () {
-  //  $('#loading').hide();
-  // }); 
 });
