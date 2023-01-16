@@ -13,6 +13,12 @@
 ReConnect is a web app that helps in connect missing people with their loved ones. An individual can report a person as missing to the ReConnect System, and other people can search if an individual has been reported as missing, the search and retrieval will be done via face recognition. 
 
 Developed by: [Rediet Tadesse](https://www.linkedin.com/in/rediet-tadesse-43209013b/)
+## Demo
+[![IMAGE ALT TEXT HERE](https://github.com/Reid-T-W/ReConnect/blob/master/Demo_Video_For_README.png?raw=true)](https://www.youtube.com/watch?v=f7LR0ib_mG0&t=11s)
+## Manifesto
+## Implemented Features
+## To Do
+## Face Search Implementation
 
 ## Installation
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
