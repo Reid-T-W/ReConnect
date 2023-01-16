@@ -14,7 +14,7 @@ ReConnect is a web app that helps in connect missing people with their loved one
 
 Developed by: [Rediet Tadesse](https://www.linkedin.com/in/rediet-tadesse-43209013b/)
 ## Demo
-[![IMAGE ALT TEXT HERE](https://github.com/Reid-T-W/ReConnect/blob/master/Demo_Video_For_README.png?raw=true)](https://www.youtube.com/watch?v=f7LR0ib_mG0&t=11s)
+[![IMAGE ALT TEXT HERE](https://github.com/Reid-T-W/ReConnect/blob/master/Demo_Video_For_README.png?raw=true)](https://youtu.be/f7LR0ib_mG0)
 ## Manifesto
 ## Implemented Features
 ## To Do
