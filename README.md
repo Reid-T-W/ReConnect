@@ -2,6 +2,11 @@
 ## Table of Contents
 [Introduction](https://github.com/Reid-T-W/ReConnect#introduction)  
 [Installation](https://github.com/Reid-T-W/ReConnect#installation)  
+[Demo Video](https://github.com/Reid-T-W/ReConnect#demo-video)
+[Manifesto](https://github.com/Reid-T-W/ReConnect#manifesto)
+[Implemented Features](https://github.com/Reid-T-W/ReConnect#implemented-features)
+[To Do](https://github.com/Reid-T-W/ReConnect#to-do)
+[Face Search Implementation](https://github.com/Reid-T-W/ReConnect#face-search-implementation)
 [Usage](https://github.com/Reid-T-W/ReConnect#usage)  
 [Contributing](https://github.com/Reid-T-W/ReConnect#contributing)  
 [Related Projects](https://github.com/Reid-T-W/ReConnect#related-projects)  
@@ -18,22 +23,22 @@ Developed by: [Rediet Tadesse](https://www.linkedin.com/in/rediet-tadesse-432090
 [![Demo video for ReConnect](https://github.com/Reid-T-W/ReConnect/blob/master/Demo_Video_For_README.png?raw=true)](https://youtu.be/f7LR0ib_mG0)
 All user profiles shown in this demo are fictional, some of the images were sourced from the FGNET dataset for demonstration purpose only. 
 Source of FGNET dataset: Y. Fu, “FG-NET dataset by Yanwei Fu,” Github, 22-Aug-2014. [Online]. Available: http://yanweifu.github.io/FG_NET_data/. [Accessed: 18-Jul-2022].
-## Manifesto
+## Manifesto  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
 Its often we see missing persons post on social media, but its also known that we look at many posts and consume various content on social media. This makes it very difficult to remember: what the person looks like, his/her contact address, or who posted about him/her.  
 What if we actually came across a missing person on the streets? The chances of remembering if we have seen a post about this person is very low, and there is no convenient way to search if the person has been posted as missing.
 This is what ReConnect aims to solve, its a central platform, where missing people can be reported as missing and can later be searched via face recognition.
-## Implemented Features
+## Implemented Features  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
 - [x] Post Missing Person
 - [x] Search Missing Person
-## To Do
+## To Do  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
-- [] Add User Account
-- [] Implement Text Search
-- [] Improve posting speed
-- [] Improve searching speed
-## Face Search Implementation
+- [ ] Add User Account
+- [ ] Implement Text Search
+- [ ] Improve posting speed
+- [ ] Improve searching speed
+## Face Search Implementation  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)
 In order to implement the face search, a library called [keras-facenet](https://github.com/faustomorales/keras-facenet) is used. It provides pre-trained versions of the facenet model.  
 The facenet model is then used to generate embeddings for every face, which is later used to determing the similarity between two faces.
