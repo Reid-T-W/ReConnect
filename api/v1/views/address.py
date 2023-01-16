@@ -13,9 +13,11 @@ def get_addresses():
     """
     Retrieves the list of all Address objects
     """
+    # Fetching all Address from the database
     all_addresses = storage.all(Address).values()
     list_addresses = []
     for address in all_addresses:
+        # Converting address into a list and adding it to a list
         list_addresses.append(address.to_dict())
     return jsonify(list_addresses)
 
@@ -25,9 +27,9 @@ def get_addresses():
 def get_address(address_id):
     """ Retrieves a specific Address """
     address = storage.get(Address, address_id)
+    # If address id does not exist in the database abort with a 404 
     if not address:
         abort(404)
-
     return jsonify(address.to_dict())
 
 
@@ -40,10 +42,12 @@ def delete_address(address_id):
     """
 
     address = storage.get(Address, address_id)
-
+    
+    # If address id does not exist in the database abort with a 404 
     if not address:
         abort(404)
 
+    # Deleting the address object
     storage.delete(address)
     storage.save()
 
@@ -56,9 +60,11 @@ def post_address():
     """
     Creates an Address
     """
+    # Ensuring that the request is a proper json
     if not request.get_json():
         abort(400, description="Not a JSON")
-
+    # Ensuring that required fields, subcity and woreda, are present in 
+    # requests json
     if 'subcity' not in request.get_json():
         abort(400, description="Subcity Missing")
 
@@ -66,6 +72,7 @@ def post_address():
         abort(400, description="Woreda Missing")
 
     data = request.get_json()
+    # Creating an address object
     instance = Address(**data)
     instance.save()
     return make_response(jsonify(instance.to_dict()), 201)
@@ -78,18 +85,22 @@ def put_address(address_id):
     Updates a Address
     """
     address = storage.get(Address, address_id)
-
+    
+    # If address id does not exist in the database abort with a 404
     if not address:
         abort(404)
 
+    # Ensuring that the request is a proper json
     if not request.get_json():
         abort(400, description="Not a JSON")
-
+    
+    # Attributes id, created_at, and updated_at cannot be updated
     ignore = ['id', 'created_at', 'updated_at']
 
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
+            # Setting a new value to the address object's attribute
             setattr(address, key, value)
     storage.save()
     return make_response(jsonify(address.to_dict()), 200)

@@ -19,9 +19,11 @@ def get_missingpersons():
     """
     Retrieves the list of all MissingPerson objects
     """
+    # Fetching all missingpersons from the database
     all_missingpersons = storage.all(MissingPerson).values()
     list_missingpersons = []
     for person in all_missingpersons:
+        # Converting person into a dict and adding it to a list
         list_missingpersons.append(person.to_dict())
     return jsonify(list_missingpersons)
 
@@ -31,6 +33,7 @@ def get_missingpersons():
 def get_missingperson(missingperson_id):
     """ Retrieves a specific MissingPerson """
     person = storage.get(MissingPerson, missingperson_id)
+    # If person does not exist in the database abort with a 404
     if not person:
         abort(404)
 
@@ -44,9 +47,12 @@ def delete_missingperson(missingperson_id):
     """
     Deletes a MissingPerson Object
     """
+    # Get missing person object by id
     person = storage.get(MissingPerson, missingperson_id)
+    # If person does not exist in the database abort with a 404
     if not person:
         abort(404)
+    # Delete the person
     storage.delete(person)
     storage.save()
     return make_response(jsonify({}), 200)
@@ -177,18 +183,22 @@ def put_missingperson(missingperson_id):
     Updates a MissingPerson
     """
     person = storage.get(MissingPerson, missingperson_id)
-
+    
+    # If person does not exist abort with a 404
     if not person:
         abort(404)
 
+    # Check if the request is a proper json
     if not request.get_json():
         abort(400, description="Not a JSON")
-
+    
+    # Ensuring that id, created_at, updated_at are not modifiable
     ignore = ['id', 'created_at', 'updated_at']
 
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
+            # Modifying the attribute
             setattr(person, key, value)
     storage.save()
     return make_response(jsonify(person.to_dict()), 200)

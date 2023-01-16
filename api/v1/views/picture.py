@@ -13,9 +13,11 @@ def get_pictures():
     """
     Retrieves the list of all State objects
     """
+    # Fetching all pictures from the database
     all_pictures = storage.all(Picture).values()
     list_pictures = []
     for picture in all_pictures:
+        # Converting picture into a dict and adding it to a list
         list_pictures.append(picture.to_dict())
     return jsonify(list_pictures)
 
@@ -25,6 +27,7 @@ def get_pictures():
 def get_picture(picture_id):
     """ Retrieves a specific MissingPerson """
     picture = storage.get(Picture, picture_id)
+    # If picture does not exist in the database, abort with a 404
     if not picture:
         abort(404)
 
@@ -38,12 +41,14 @@ def delete_picture(picture_id):
     """
     Deletes a Picture Object
     """
-
+    # Get picture by id 
     picture = storage.get(Picture, picture_id)
-
+    
+    # If picture does not exist in the database, abort with a 404
     if not picture:
         abort(404)
 
+    # Delete the picture
     storage.delete(picture)
     storage.save()
 
@@ -56,13 +61,16 @@ def post_picture():
     """
     Creates a Picture
     """
+    # Check if the request is a proper json
     if not request.get_json():
         abort(400, description="Not a JSON")
 
+    # Check if the mandatory field picture is in request json
     if 'picture' not in request.get_json():
         abort(400, description="Picture Missing")
 
     data = request.get_json()
+    # Create a Picture instance
     instance = Picture(**data)
     instance.save()
     return make_response(jsonify(instance.to_dict()), 201)
@@ -75,18 +83,22 @@ def put_picture(picture_id):
     Updates a Picture
     """
     picture = storage.get(Picture, picture_id)
-
+    
+    # If picture does not exist abort with a 404
     if not picture:
         abort(404)
 
+    # Check if the request is a proper json
     if not request.get_json():
         abort(400, description="Not a JSON")
 
+    # Ensuring that id, created_at, updated_at are not modifiable
     ignore = ['id', 'created_at', 'updated_at']
 
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
+            # Modifying the attributes
             setattr(picture, key, value)
     storage.save()
     return make_response(jsonify(picture.to_dict()), 200)
