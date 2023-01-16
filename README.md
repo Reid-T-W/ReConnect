@@ -42,7 +42,10 @@ This is what ReConnect aims to solve, its a central platform, where missing peop
 ## Face Search Implementation  
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 In order to implement the face search, a library called [keras-facenet](https://github.com/faustomorales/keras-facenet) is used. It provides pre-trained versions of the facenet model.  
-The facenet model is then used to generate embeddings for every face, which is later used to determing the similarity between two faces.
+The pre-trained facenet model is then used to generate embeddings for every face, which is later used to determing the similarity between two faces.  
+The process of generating embeddings is shown below  
+![alt text](https://github.com/Reid-T-W/ReConnect/blob/master/embedding_geneartion_process.jpg?raw=true)
+
 ## Installation
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 The webapp is currently not deployed due computational resource issues, but it will be deployed soon. Users will then be able to directly access the site with the url that will be provided here
