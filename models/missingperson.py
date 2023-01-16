@@ -12,6 +12,8 @@ from sqlalchemy.orm import relationship
 
 
 if models.storage_t == "db":
+    # A table that is created to handle the many to many relationship
+    # between missingperson and contacts table
     missingpersoncontact = Table('missingpersoncontact', Base.metadata,
                                  Column('missingperson_id', String(60),
                                         ForeignKey('missingperson.id',
