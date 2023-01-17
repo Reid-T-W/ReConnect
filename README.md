@@ -49,7 +49,7 @@ The process of generating embeddings is shown below
 
 ## Installation
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
-The webapp is currently not deployed due computational resource issues, but it will be deployed soon. Users will then be able to directly access the site with the url that will be provided here
+The webapp is currently not deployed due to computational resource issues, but it will be deployed soon. Users will then be able to directly access the site with the url that will be provided here
 
 ## Usage
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
