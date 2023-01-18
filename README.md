@@ -46,7 +46,7 @@ In order to implement the face search, a library called [keras-facenet](https://
 The pre-trained facenet model is then used to generate embeddings for every face, which is later used to determing the similarity between two faces.  
 The process of generating embeddings is shown below  
 ![alt text](https://github.com/Reid-T-W/ReConnect/blob/master/embedding_geneartion_process.jpg?raw=true)
-The image of the pre-trained CNN model is originally obtained from [kennethleungty's Neural-Network-Architecture-Diagrams repo](https://github.com/kennethleungty/Neural-Network-Architecture-Diagrams)  
+The image of the pre-trained CNN model is originally obtained from the draw.io models provided by [kennethleungty's Neural-Network-Architecture-Diagrams repo](https://github.com/kennethleungty/Neural-Network-Architecture-Diagrams) with some modifications made to it.  
 ## Installation
 [Back to Top](https://github.com/Reid-T-W/ReConnect#table-of-contents)  
 The webapp is currently not deployed due to computational resource issues, but it will be deployed soon. Users will then be able to directly access the site with the url that will be provided here
